@@ -30,6 +30,7 @@ module Fluent
         return @chain.next
       end
       @offset += 1
+      Trace.trace(@array[@offset-1], @tag, @array[0, @offset-1])
       result = @array[@offset-1].emit(@tag, @es, self)
       result
     end
@@ -42,6 +43,7 @@ module Fluent
       end
       @offset += 1
       es = @array.length > @offset ? @es.dup : @es
+      Trace.trace(@array[@offset-1], @tag, @array[0, @offset-1])
       result = @array[@offset-1].emit(@tag, es, self)
       result
     end

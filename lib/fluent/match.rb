@@ -32,6 +32,7 @@ module Fluent
     attr_reader :output
 
     def emit(tag, es)
+      Trace.trace(@output, tag)
       chain = NullOutputChain.instance
       @output.emit(tag, es, chain)
     end
